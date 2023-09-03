@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Locker</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        #locker {
+            text-align: center;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+    </style>
+</head>
+<body>
+    <div id="locker">
+        <h1>Welcome to the Locker</h1>
+        <p>Enter the 3-digit code to unlock:</p>
+        <input type="text" id="codeInput" maxlength="3">
+        <button id="unlockButton">Unlock</button>
+        <div id="hiddenContent" style="display: none;">
+            <p>This is the secret text that you've unlocked!</p>
+        </div>
+    </div>
+
+    <script>
+        const unlockButton = document.getElementById("unlockButton");
+        const codeInput = document.getElementById("codeInput");
+        const hiddenContent = document.getElementById("hiddenContent");
+
+        unlockButton.addEventListener("click", function () {
+            const enteredCode = codeInput.value;
+            if (enteredCode === "863") {
+                hiddenContent.style.display = "block";
+                codeInput.disabled = true;
+                unlockButton.disabled = true;
+            } else {
+                alert("Incorrect code. Please try again.");
+                codeInput.value = "";
+            }
+        });
+    </script>
+</body>
+</html>

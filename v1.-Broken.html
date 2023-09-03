@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Safe Locker</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+        .safe-container {
+            margin: 50px auto;
+            max-width: 300px;
+            background-color: #f0f0f0;
+            border: 1px solid #333;
+            padding: 20px;
+            border-radius: 10px;
+        }
+        .safe-button {
+            width: 50px;
+            height: 50px;
+            margin: 5px;
+            font-size: 20px;
+            cursor: pointer;
+        }
+        #codeDisplay {
+            margin-top: 20px;
+            font-size: 18px;
+        }
+        #unlockButton {
+            margin-top: 20px;
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #4CAF50;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="safe-container">
+        <h1>Safe Locker</h1>
+        <p>Enter the 3-digit code to unlock:</p>
+        <div id="codeDisplay"></div>
+        <div>
+            <button class="safe-button" onclick="enterDigit(1)">1</button>
+            <button class="safe-button" onclick="enterDigit(2)">2</button>
+            <button class="safe-button" onclick="enterDigit(3)">3</button>
+        </div>
+        <div>
+            <button class="safe-button" onclick="enterDigit(4)">4</button>
+            <button class="safe-button" onclick="enterDigit(5)">5</button>
+            <button class="safe-button" onclick="enterDigit(6)">6</button>
+        </div>
+        <div>
+            <button class="safe-button" onclick="enterDigit(7)">7</button>
+            <button class="safe-button" onclick="enterDigit(8)">8</button>
+            <button class="safe-button" onclick="enterDigit(9)">9</button>
+        </div>
+        <div>
+            <button class="safe-button" onclick="clearCode()">C</button>
+            <button class="safe-button" onclick="enterDigit(0)">0</button>
+            <button class="safe-button" onclick="deleteLastDigit()">&#9003;</button>
+        </div>
+        <button id="unlockButton" onclick="checkCode()">Unlock</button>
+        <div id="hiddenContent" style="display: none;">
+            <p>Welcome. You're one of the only people who will see this. Welcome to the locker, we will store info here about upcoming projects or missions.</p>
+        </div>
+    </div>
+
+    <script>
+        let code = "";
+        const codeDisplay = document.getElementById("codeDisplay");
+        const unlockButton = document.getElementById("unlockButton");
+        const hiddenContent = document.getElementById("hiddenContent");
+
+        function enterDigit(digit) {
+            if (code.length < 3) {
+                code += digit;
+                updateCodeDisplay();
+            }
+        }
+
+        function clearCode() {
+            code = "";
+            updateCodeDisplay();
+        }
+
+        function deleteLastDigit() {
+            code = code.slice(0, -1);
+            updateCodeDisplay();
+        }
+
+        function updateCodeDisplay() {
+            codeDisplay.textContent = "Code: " + "*".repeat(code.length);
+        }
+
+        function checkCode() {
+            if (code === "863") {
+                hiddenContent.style.display = "block";
+                unlockButton.disabled = true;
+            } else {
+                alert("Incorrect code. Please try again.");
+                clearCode();
+            }
+        }
+    </script>
+</body>
+</html>
